@@ -9,7 +9,7 @@ def pascal_triangle(n):
     pascals triangle function
     """
     if n == 0:
-        return
+        return []
     matrix = [
         [1],
         [1, 1]
