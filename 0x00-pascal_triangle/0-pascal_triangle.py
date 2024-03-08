@@ -1,4 +1,13 @@
+#!/usr/bin/python3
+"""
+This module host the code that calculates pascals triangle
+"""
+
+
 def pascal_triangle(n):
+    """
+    pascals triangle function
+    """
     matrix = [
         [1],
         [1, 1]
