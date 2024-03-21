@@ -14,18 +14,18 @@ def minOperations(n: int) -> int:
     finds prime factors which equate
     to minimum operations number
     """
-    i = 0
-    a = 0
-    b = 0
-    primes = [2, 3, 5, 7]
-    while (i < len(primes)):
-        if n % primes[i] == 0:
-            a = primes[i]
-            b = n / primes[i]
-            break
-        i += 1
-    if a == 0 and b == 0:
-        return 0
-    if b in primes:
-        return int(a) + int(b)
-    return int(a) + int(minOperations(b))
+    if n <= 1:
+        return n
+    current_chars = 1
+    clipboard = 0
+    operations = 2
+    while current_chars < n:
+        if n % current_chars == 0:
+            clipboard = current_chars
+            operations += 1
+            current_chars += clipboard
+        else:
+            current_chars += clipboard
+            operations += 2
+
+    return operations
