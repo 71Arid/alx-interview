@@ -35,18 +35,21 @@ signal.signal(signal.SIGPIPE, interrupt_handler)
 
 
 for line in sys.stdin:
-    if (count == 10):
-        count = 0
-        printing()
-    if re.match(regex_str, line):
-        fs = re.search(file, line)
-        file_size += int(fs.group())
-        st = re.search(status, line)
-        st_code = int(st.group())
-        value = buffer.get(st_code, 0)
-        value += 1
-        buffer[st_code] = value
-    count += 1
+    try:
+        if (count == 10):
+            count = 0
+            printing()
+        if re.match(regex_str, line):
+            fs = re.search(file, line)
+            file_size += int(fs.group())
+            st = re.search(status, line)
+            st_code = int(st.group())
+            value = buffer.get(st_code, 0)
+            value += 1
+            buffer[st_code] = value
+        count += 1
+    except Exception as e:
+        continue
 
 printing()
 
