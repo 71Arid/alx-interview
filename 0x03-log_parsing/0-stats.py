@@ -31,6 +31,7 @@ def interrupt_handler(signum, frame):
 
 
 signal.signal(signal.SIGINT, interrupt_handler)
+signal.signal(signal.SIGPIPE, interrupt_handler)
 
 
 for line in sys.stdin:
@@ -46,6 +47,8 @@ for line in sys.stdin:
         value += 1
         buffer[st_code] = value
     count += 1
+
+printing()
 
 '''
 if re.match(regex_str, tester):
