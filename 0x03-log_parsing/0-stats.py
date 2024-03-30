@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 this the the code to impliment a log parsing
 scenario using regex and signals to achieve desired
