@@ -36,9 +36,9 @@ for line in sys.stdin:
         if (count == 10):
             count = 0
             printing()
+        fs = re.search(file, line)
+        file_size += int(fs.group())
         if re.match(regex_str, line):
-            fs = re.search(file, line)
-            file_size += int(fs.group())
             st_code = line.split()[-2]
             value = buffer.get(st_code, 0)
             value += 1
