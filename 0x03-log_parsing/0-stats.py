@@ -13,7 +13,6 @@ regex_str = (r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - \[(\d{4}-\d{2}-\d{2} '
              r'\d{2}:\d{2}:\d{2}\.\d{6})\] ("GET /projects/260 HTTP/1.1") '
              r'(\d{3} \d{1,4})$')
 file = r'\d{1,4}$'
-status = r'(200|301|400|401|403|404|405|500)'
 count = 0
 file_size = 0
 buffer = {}
@@ -31,8 +30,6 @@ def interrupt_handler(signum, frame):
 
 
 signal.signal(signal.SIGINT, interrupt_handler)
-signal.signal(signal.SIGPIPE, interrupt_handler)
-
 
 for line in sys.stdin:
     try:
@@ -42,8 +39,7 @@ for line in sys.stdin:
         if re.match(regex_str, line):
             fs = re.search(file, line)
             file_size += int(fs.group())
-            st = re.search(status, line)
-            st_code = int(st.group())
+            st_code = line.split()[-2]
             value = buffer.get(st_code, 0)
             value += 1
             buffer[st_code] = value
