@@ -13,7 +13,7 @@ def validUTF8(data):
     an implementation of utf rules
     """
     num_bytes = 0
-    
+
     for num in data:
         # Check if the most significant bit (MSB) is set
         if num_bytes == 0:
@@ -31,8 +31,8 @@ def validUTF8(data):
             # Check if the first two bits are 10
             if (num >> 6) != 0b10:
                 return False
-        
+
         num_bytes -= 1
-    
+
     # If all bytes are processed correctly, num_bytes should be zero
     return num_bytes == 0
