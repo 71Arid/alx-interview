@@ -7,20 +7,24 @@ const url = `https://swapi-api.alx-tools.com/api/films/${Fid}`;
 
 function fetchMovie (url) {
   request(url, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      const film = JSON.parse(body);
-      const characters = film.characters;
-      characters.forEach(url => fetchCharacter((url)));
+    if (error) {
+        console.log(error);
     }
-  });
-}
-
-function fetchCharacter (url) {
-  request(url, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      const character = JSON.parse(body);
-      console.log(character.name);
-    }
+    const film = JSON.parse(body);
+    const characters = film.characters;
+    const charactersNames = characters.map(
+      url => new Promise((resolve, reject) => {
+        request(url, (err, _, body) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(JSON.parse(body).name);
+        });
+      })
+    );
+    Promise.all(charactersNames)
+      .then(names => console.log(names.join('\n')))
+      .catch(err => console.log(err))
   });
 }
 
