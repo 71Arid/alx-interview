@@ -8,7 +8,7 @@ const url = `https://swapi-api.alx-tools.com/api/films/${Fid}`;
 function fetchMovie (url) {
   request(url, (error, response, body) => {
     if (error) {
-        console.log(error);
+      console.log(error);
     }
     const film = JSON.parse(body);
     const characters = film.characters;
@@ -24,7 +24,7 @@ function fetchMovie (url) {
     );
     Promise.all(charactersNames)
       .then(names => console.log(names.join('\n')))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   });
 }
 
